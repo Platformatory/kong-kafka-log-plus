@@ -33,19 +33,19 @@ function KafkaLogPlus:log(config)
         method = kong.request.get_method(),
         path = kong.request.get_path_with_query(),
         headers = kong.request.get_headers(),
-        body = kong.request.get_raw_body(), -- check
+        body = "DUMMY", -- check
       },
       response = {
         status = kong.response.get_status(),
         headers = kong.response.get_headers(),
-        body = kong.response.get_raw_body(),
+        body = "DUMMY",
       },
       consumer = kong.client.get_consumer(),
       route = kong.router.get_route(),
       service = kong.router.get_service(),
-    }   
+    }
        
-    local ok, err = ngx.timer.at(0, timedKafkaLog, config, logPayLoad)
+    local ok, err = ngx.timer.at(0, timedKafkaLog, config, logPayload)
     if not ok then
       ngx.log(ngx.ERR, "timer no create:", err)
       return
@@ -87,7 +87,7 @@ function timedKafkaLog(premature, config, logPayLoad)
 --  local brokers, partitions = cli:fetch_metadata("fx")
 
     local p = producer:new(broker_list, client_config)
-    local offset, err = p:send(config.topic, logPayLoad.request.path, json_encode(logPayLoad))
+    local offset, err = p:send(config.topic, logPayLoad.request.path, json.encode(logPayLoad))
     if not offset then
       kong.log("send err:", err)
       return
