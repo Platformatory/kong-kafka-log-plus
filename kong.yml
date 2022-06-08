@@ -1,0 +1,18 @@
+_format_version: "2.1"
+services:
+- name: "just-a-google-service"
+  url: https://google.com
+  routes:
+  - name: route-42
+    paths:
+    - /
+plugins:
+- name: kong-kafka-log-plus
+  config:
+    bootstrap_servers: "changeit"
+    port: 9092
+    ssl: true
+    sasl_mechanism: "PLAIN"
+    sasl_user: "changeit"
+    sasl_password: "changeit"
+
