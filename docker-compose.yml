@@ -20,7 +20,7 @@ services:
       KONG_DATABASE: 'off'
       KONG_PROXY_ACCESS_LOG: /dev/stdout
       KONG_PROXY_ERROR_LOG: /dev/stderr
-      KONG_PLUGINS: kong-kafka-log-plus
+      KONG_PLUGINS: kong-kafka-log-plus, key-auth
     networks:
       - kong-net
     ports:

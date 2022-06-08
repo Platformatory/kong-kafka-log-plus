@@ -9,10 +9,24 @@ services:
 plugins:
 - name: kong-kafka-log-plus
   config:
-    bootstrap_servers: "changeit"
+    bootstrap_servers: "fixme"
+    topic: "fx"
     port: 9092
     ssl: true
     sasl_mechanism: "PLAIN"
-    sasl_user: "changeit"
-    sasl_password: "changeit"
-
+    sasl_user: "fixme"
+    sasl_password: "fixme"
+- name: key-auth
+  config: 
+    key_names:
+    - apikey
+    key_in_body: false
+    key_in_header: true
+    key_in_query: true
+    hide_credentials: false
+    run_on_preflight: true
+consumers:
+- username: user
+keyauth_credentials:
+- consumer: user
+  key: my-key
