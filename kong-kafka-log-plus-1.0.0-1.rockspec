@@ -16,7 +16,8 @@ description = {
 }
 
 dependencies = {
-  "lua-resty-kafka = 0.20-0"
+  "lua-resty-kafka >= 0.20-0",
+  "uuid >= 0.3-1",
 }
 
 build = {
